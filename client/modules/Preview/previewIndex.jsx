@@ -19,7 +19,8 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 const App = () => {
-  const [state, dispatch] = useReducer(filesReducer, [], initialState);
+  // Corrected useReducer usage: second argument is the initial state
+  const [state, dispatch] = useReducer(filesReducer, initialState);
   const [isPlaying, setIsPlaying] = useState(false);
   const [basePath, setBasePath] = useState('');
   const [textOutput, setTextOutput] = useState(false);
@@ -57,7 +58,8 @@ const App = () => {
     return function cleanup() {
       unsubscribe();
     };
-  });
+  }, []); // Added dependency array to avoid re-running on every render
+
   return (
     <React.Fragment>
       <GlobalStyle />
